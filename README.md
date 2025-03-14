@@ -62,7 +62,7 @@ You should have a folder in the root project
 │   │   ├── CountComponent.tsx - sketch code
 │   │   └── sketch.config.js
 ├── src
-│   ├── CountComponent.tsx - compiled code
+│   ├── CountComponent.tsx - compiled/transformed code
 ├── .env
 └── package.json
 ```
