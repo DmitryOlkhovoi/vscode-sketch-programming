@@ -2,11 +2,15 @@ import * as vscode from 'vscode';
 import * as path from "path";
 import * as fs from "fs/promises";
 import { pathToFileURL } from "url";
+import OpenAI from 'openai';
+import Storage from './storage';
+import { Config } from './types';
 
 class Workspace {
     assistant: any
-    storage: any;
-    config: any
+    private openAiClient: OpenAI | null = null;
+    private storage: Storage | null = null;
+    config: Config | null = null;
 
     public root: string;
     public isReady: boolean = false;
@@ -15,8 +19,13 @@ class Workspace {
         this.root = root;
     }
 
-    initialize() {
-       return this.loadSketchConfig();
+    async initialize() {
+        await this.loadSketchConfig();
+        
+        if (this.config) {
+            this.openAiClient = new OpenAI({ apiKey: this.config.openAIApiKey });
+            this.storage = new Storage(this.openAiClient, this.config.openAIVectorStoreId);
+        }
     }
 
     async loadSketchConfig() {
@@ -30,7 +39,6 @@ class Workspace {
             const config = await import(fileURL.href); 
 
             this.config = config.default;
-            this.isReady = true;
         } catch (error) {
             vscode.window.showErrorMessage(`Sketch-programming Workspace: ${this.root} - Error loading sketch config`);
             console.error(error, this.root);

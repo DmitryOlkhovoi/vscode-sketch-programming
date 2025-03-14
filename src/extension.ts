@@ -38,25 +38,6 @@ export async function activate(context: vscode.ExtensionContext) {
 		}
 	}
 
-	function transpileSketch(document: vscode.TextDocument, config: any) {
-		// const apiKey = config.openAIApiKey;
-        // const openAI = new OpenAI({ apiKey });
-
-        // const prompt = `Your sketch: ${document.fileName}\n\n${document.getText()}`;
-        // const response = await openAI.Completion.create({
-        //     engine: "davinci",
-        //     prompt,
-        //     maxTokens: 1000,
-        //     temperature: 0.7,
-        //     frequencyPenalty: 0.0,
-        //     presencePenalty: 0.0,
-        //     stop: ["\n"]
-        // });
-
-        // vscode.window.showInformationMessage(`Transpiled sketch:\n\n${response.choices[0].text}`);
-        // console.log("Transpiled sketch:", response.choices[0].text);
-	}
-
 	vscode.window.onDidChangeActiveTextEditor((editor: vscode.TextEditor | undefined) => {
 		if (editor) {
 			updateSketchName(editor)
