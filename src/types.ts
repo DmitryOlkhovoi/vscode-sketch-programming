@@ -1,4 +1,4 @@
 export interface Config {
-    openAIApiKey: string,
-    openAIVectorStoreId: string
+    openAIApiKey: string;
+    projectId: string;
 }

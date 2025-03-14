@@ -60,7 +60,12 @@ export async function activate(context: vscode.ExtensionContext) {
 					await currentWorkspace.initialize();
                 }
 				
-				currentWorkspace.transpile(document.getText());
+				const traspiledCode = await currentWorkspace.transpile(document.getText());
+
+				if (traspiledCode) {
+					console.log(`Transpiled code: ${traspiledCode}`);
+					currentWorkspace.saveFile(document, traspiledCode);
+				}
             } else {
 				vscode.window.showErrorMessage(`Sketch-programming Workspace: No config in the root`);
 			}
