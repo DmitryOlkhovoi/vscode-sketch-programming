@@ -1,5 +1,7 @@
 # sketch-programming--llm-transpiler WIP
 
+VS Code Marketplace - https://marketplace.visualstudio.com/items?itemName=Sketch-programming.sketch-programming-llm-transpiler
+
 POC extention as one of implementerion of Sketch programming
 https://github.com/DmitryOlkhovoi/Sketch-programming
 
