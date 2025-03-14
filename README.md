@@ -76,4 +76,5 @@ export default {
 ```
 
 ### Current state
-You need to creare Assistant, Vector store for it, and upload Sketch files that describse the syntax (for example https://github.com/DmitryOlkhovoi/Sketch-programming/blob/main/ReactComponentAskedModelToAddMoreRulesItself.md)
+You need to creare Assistant, Vector store for it, and upload Sketch files that describe the syntax (for example https://github.com/DmitryOlkhovoi/Sketch-programming/blob/main/ReactComponentAskedModelToAddMoreRulesItself.md)
+Work in progress, this process will be automated
