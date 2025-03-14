@@ -62,6 +62,7 @@ You should have a folder in the root project
 
 ### Config example
 
+sketch.config.js:
 ```
 export default {
     openAIApiKey: 'YOUR-API-KEY',
