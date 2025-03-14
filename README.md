@@ -3,6 +3,9 @@
 POC extention as one of implementerion of Sketch programming
 https://github.com/DmitryOlkhovoi/Sketch-programming
 
+![Снимок экрана 2025-03-14 232453](https://github.com/user-attachments/assets/0e881713-d010-4bf2-8b0c-585d8288d98c)
+
+
 ```
 // @sketch:reactComponent
 
@@ -52,10 +55,10 @@ You should have a folder in the root project
 │   ├── sketches
 │   │   └── reactComponent.md
 │   ├── src
-│   │   ├── CountComponent.jsx - sketch code
+│   │   ├── CountComponent.tsx - sketch code
 │   │   └── sketch.config.js
 ├── src
-│   ├── CountComponent.jsx - compiled code
+│   ├── CountComponent.tsx - compiled code
 ├── .env
 └── package.json
 ```
