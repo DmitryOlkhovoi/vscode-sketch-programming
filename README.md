@@ -10,16 +10,16 @@ VS Code Marketplace - https://marketplace.visualstudio.com/items?itemName=Sketch
 ####  Sketch-programming: Initialize
 ```CTR + Shift + P``` and search for ```Sketch-programming: Initialize```. This command will create Sketch folder with a config and examples.
 
-Common project folder:
+Common project structure:
 ```
-├── project
+├ project
 │   ├── sketches
 │   │   └── reactComponent.md
 │   ├── src
-│   │   ├── CountComponent- sketch code
+│   │   ├── CountComponent - sketch code
 │   │   └── sketch.config.js
 ├── src
-│   ├── CountComponent.tsx - compiled/transformed code
+│   ├── CountComponent.tsx - transpiled code
 ├── .env
 └── package.json
 ```
