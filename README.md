@@ -1,5 +1,7 @@
 # sketch-programming--llm-transpiler WIP
 
+VS Code Marketplace - https://marketplace.visualstudio.com/items?itemName=Sketch-programming.sketch-programming-llm-transpiler
+
 POC extention as one of implementerion of Sketch programming
 https://github.com/DmitryOlkhovoi/Sketch-programming
 
@@ -22,7 +24,7 @@ state count = 0
 </div>
 ```
 
-On save will save a new file
+On save transpiles to:
 
 ```typescript
 import React, { useState } from 'react';
@@ -50,7 +52,7 @@ export default CountComponent;
 
 ```
 
-You should have a folder in the root project
+You should have a sketch folder in the root project
 
 ```
 ├── project
@@ -60,7 +62,7 @@ You should have a folder in the root project
 │   │   ├── CountComponent.tsx - sketch code
 │   │   └── sketch.config.js
 ├── src
-│   ├── CountComponent.tsx - compiled code
+│   ├── CountComponent.tsx - compiled/transformed code
 ├── .env
 └── package.json
 ```
