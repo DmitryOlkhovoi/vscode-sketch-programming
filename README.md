@@ -1,9 +1,28 @@
-# sketch-programming--llm-transpiler WIP
+# Sketch-programming (LLM-Transpiler) - WIP
+
+POC extention as one of implementation of Sketch programming
+https://github.com/DmitryOlkhovoi/Sketch-programming
 
 VS Code Marketplace - https://marketplace.visualstudio.com/items?itemName=Sketch-programming.sketch-programming-llm-transpiler
 
-POC extention as one of implementerion of Sketch programming
-https://github.com/DmitryOlkhovoi/Sketch-programming
+### Extension commands
+
+####  Sketch-programming: Initialize
+```CTR + Shift + P``` and search for ```Sketch-programming: Initialize```. This command will create Sketch folder with a config and examples.
+
+Common project folder:
+```
+├── project
+│   ├── sketches
+│   │   └── reactComponent.md
+│   ├── src
+│   │   ├── CountComponent- sketch code
+│   │   └── sketch.config.js
+├── src
+│   ├── CountComponent.tsx - compiled/transformed code
+├── .env
+└── package.json
+```
 
 ### Example with React.js
 
@@ -12,6 +31,7 @@ https://github.com/DmitryOlkhovoi/Sketch-programming
 
 ```
 // @sketch:reactComponent
+// @ext:tsx
 
 Component Count
 
@@ -52,22 +72,7 @@ export default CountComponent;
 
 ```
 
-You should have a sketch folder in the root project
-
-```
-├── project
-│   ├── sketches
-│   │   └── reactComponent.md
-│   ├── src
-│   │   ├── CountComponent.tsx - sketch code
-│   │   └── sketch.config.js
-├── src
-│   ├── CountComponent.tsx - compiled/transformed code
-├── .env
-└── package.json
-```
-
-### Config example
+### Config
 
 sketch.config.js:
 ```
