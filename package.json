@@ -18,8 +18,16 @@
   "contributes": {
     "commands": [
       {
-        "command": "sketch-programming--llm-transpiler-.uploadScketches",
-        "title": "Upload all sketches"
+        "command": "sketch-programming--llm-transpiler-.initialize",
+        "title": "Sketch-programming: Initialize"
+      },
+      {
+        "command": "sketch-programming--llm-transpiler-.create",
+        "title": "Sketch-programming: Create assistant and vector store"
+      },
+      {
+        "command": "sketch-programming--llm-transpiler-.upload",
+        "title": "Sketch-programming: Upload all sketches"
       }
     ]
   },
