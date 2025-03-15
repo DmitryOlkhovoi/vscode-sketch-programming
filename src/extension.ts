@@ -6,6 +6,7 @@ import OpenAI from "openai";
 import Storage from "./storage";
 import Workspace from "./workspace";
 import { findSketchProjectRoot } from "./utils";
+import ProjectInit from "./projectInit";
 
 const REGEX_FOR_SKETCH = /\/\/\s*@sketch:\s*([^\s]+)/i;
 
@@ -48,6 +49,13 @@ export async function activate(context: vscode.ExtensionContext) {
 
 		root = await findSketchProjectRoot(editor.document.uri.fsPath);
 	}
+
+	 let initializeCommand = vscode.commands.registerCommand('sketch-programming--llm-transpiler.initialize', async () => {
+        const projectInit = new ProjectInit();
+        await projectInit.copyExampleProjectFiles();
+    });
+
+    context.subscriptions.push(initializeCommand);
 
 	vscode.window.onDidChangeActiveTextEditor((editor: vscode.TextEditor | undefined) => {
 		if (editor) {

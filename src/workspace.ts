@@ -55,9 +55,14 @@ class Workspace {
         }
     }
 
+    getFileExtensionFromContent(content: string): string | null {
+        const extMatch = content.match(/@ext:(\w+)/);
+        return extMatch ? extMatch[1] : 'no@ext';
+    }
+
     saveFile(document: vscode.TextDocument, content: string) {
         const normalizedPath = path.normalize(document.uri.fsPath.replace(this.root, '').replace(/[/\\]sketch/g, ''));
-        const filePath = path.join(this.root, normalizedPath);
+        const filePath = path.join(this.root, `${normalizedPath}.${this.getFileExtensionFromContent(document.getText())}`);
         console.log(`Sketch-programming Workspace: Saving file ${filePath}`);
 
         fs.mkdir(path.dirname(filePath), { recursive: true })
