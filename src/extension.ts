@@ -50,12 +50,21 @@ export async function activate(context: vscode.ExtensionContext) {
 		root = await findSketchProjectRoot(editor.document.uri.fsPath);
 	}
 
-	 let initializeCommand = vscode.commands.registerCommand('sketch-programming--llm-transpiler.initialize', async () => {
+	const initializeCommand = vscode.commands.registerCommand('sketch-programming--llm-transpiler.initialize', async () => {
         const projectInit = new ProjectInit();
         await projectInit.copyExampleProjectFiles();
     });
 
+	const currentRootCommand = vscode.commands.registerCommand('sketch-programming--llm-transpiler.currentRoot', async () => {
+		if (vscode.window.activeTextEditor) {
+			await updateRoot(vscode.window.activeTextEditor);
+		}
+
+		vscode.window.showInformationMessage(`Sketch-programming Extension: Current root: ${root || 'No root found, start editing your Sketch files.'}`);
+    });
+
     context.subscriptions.push(initializeCommand);
+    context.subscriptions.push(currentRootCommand);
 
 	vscode.window.onDidChangeActiveTextEditor((editor: vscode.TextEditor | undefined) => {
 		if (editor) {
