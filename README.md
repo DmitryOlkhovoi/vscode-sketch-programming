@@ -5,7 +5,7 @@ https://github.com/DmitryOlkhovoi/Sketch-programming
 
 VS Code Marketplace - https://marketplace.visualstudio.com/items?itemName=Sketch-programming.sketch-programming-llm-transpiler
 
-### Extension commands
+### Extension commands:
 
 ####  Sketch-programming: Initialize
 ```CTR + Shift + P``` and search for ```Sketch-programming: Initialize```. This command will create Sketch folder with a config and examples.
@@ -28,6 +28,9 @@ Project/
 │   └── App.tsx
 └── other_project_files/
 ```
+
+####  Sketch-programming: Initialize
+```CTR + Shift + P``` and search for ```Sketch-programming: Create assistant and vector store```. This command will create Assistant and a Vector store for it.
 
 ### Example with React.js
 
