@@ -6,7 +6,9 @@ https://github.com/DmitryOlkhovoi/Sketch-programming
 VS Code Marketplace - https://marketplace.visualstudio.com/items?itemName=Sketch-programming.sketch-programming-llm-transpiler
 
 ## Usage
-If you have a new project - run all 3 commands
+If you have a new project - run all 3 commands.
+
+Don't forget to add your key to sketch.config.js after ```Sketch-programming: Initialize```.
 
 ### Extension commands:
 
