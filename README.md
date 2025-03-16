@@ -5,6 +5,9 @@ https://github.com/DmitryOlkhovoi/Sketch-programming
 
 VS Code Marketplace - https://marketplace.visualstudio.com/items?itemName=Sketch-programming.sketch-programming-llm-transpiler
 
+## Usage
+If you have a new project - run all 3 commands
+
 ### Extension commands:
 
 ####  Sketch-programming: Initialize
@@ -29,8 +32,11 @@ Project/
 └── other_project_files/
 ```
 
-####  Sketch-programming: Create assistant and vector stor
+####  Sketch-programming: Create assistant and vector store
 ```CTR + Shift + P``` and search for ```Sketch-programming: Create assistant and vector store```. This command will create Assistant and a Vector store for it.
+
+####  Sketch-programming: Upload
+```CTR + Shift + P``` and search for ```Sketch-programming: Upload```. This command will upload sketches to Vector store. Will remove old version and reattach to vector store.
 
 ### Example with React.js
 
