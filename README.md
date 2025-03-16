@@ -1,4 +1,4 @@
-# Sketch-programming (LLM-Transpiler) - WIP
+# Sketch-programming (LLM-Transpiler) - POC (or not just POC, will see)
 
 POC extention as one of implementation of Sketch programming
 https://github.com/DmitryOlkhovoi/Sketch-programming
