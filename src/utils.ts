@@ -31,7 +31,7 @@ export function getDefaultAssistant(name: string, vectorStoreId: string): Assist
         "name": name,
         "description": 'Sketch assistant for transpiling metacode to actual code.',
         "model": "gpt-4o",
-        "instructions": "You are a transpiler, you get file with @sketch:sketch_name tag in the content.\nYou have files describing how to transpile metacode to actual code. \nAnswer the code in the json field \"transpiledCode\" without any additional text.",
+        "instructions": "You are a transpiler, you get file with @sketch:sketch_name tag in the content.\nYou have files describing how to transpile metacode to actual code. \nAnswer the code in the json field \"transpiledCode\" without any additional text. Do not wrap code in any formatting.",
         "tools": [
             {
                 "type": "code_interpreter"
