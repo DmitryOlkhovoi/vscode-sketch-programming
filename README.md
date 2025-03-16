@@ -1,6 +1,7 @@
-# Sketch-programming (LLM-Transpiler) - POC (or not just POC, will see)
+# Sketch-programming (LLM-Transpiler) -
+POC (or not just POC, will see)
 
-POC extention as one of implementation of Sketch programming
+Extention as one of implementation of Sketch programming
 https://github.com/DmitryOlkhovoi/Sketch-programming
 
 VS Code Marketplace - https://marketplace.visualstudio.com/items?itemName=Sketch-programming.sketch-programming-llm-transpiler
