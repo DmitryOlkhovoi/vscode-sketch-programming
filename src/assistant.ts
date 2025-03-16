@@ -1,5 +1,7 @@
 import * as vscode from 'vscode';
 import OpenAI from "openai";
+import { getDefaultAssistant } from './utils';
+import { AssistantCreateParams } from 'openai/resources/beta/assistants.mjs';
 
 class Assistant {
     private id: string | null = null;
@@ -10,6 +12,17 @@ class Assistant {
     constructor(name: string, openAiClient: OpenAI) {
         this.name = name;
         this.openAiClient = openAiClient;
+    }
+
+    static async hasAssistant(name: string, openAiClient: OpenAI) {
+        const assistants = await openAiClient.beta.assistants.list();
+        return assistants.data.some((assistant) => assistant.name === name);
+    }
+
+    static async createAssistant(name: string, vectorStoreId: string, assistantConfig: AssistantCreateParams | null, openAiClient: OpenAI) {
+        const defaultAssistant = assistantConfig || getDefaultAssistant(name, vectorStoreId);
+
+        return await openAiClient.beta.assistants.create(defaultAssistant);
     }
 
     async intialize() {

@@ -5,11 +5,11 @@ import fs from "fs";
 
 class Storage {
     private openAiClient: OpenAI;
-    private vectorStoreId: string;
+    private vectorStoreName: string;
 
-    constructor(openAIclient: OpenAI, vectorStoreId: string) {
+    constructor(vectorStoreName: string, openAIclient: OpenAI) {
         this.openAiClient = openAIclient;
-        this.vectorStoreId = vectorStoreId;
+        this.vectorStoreName = vectorStoreName;
     }
 
    async uploadFile(filePath: string): Promise<string> {
@@ -48,28 +48,33 @@ class Storage {
     getListOfFiles(): PagePromise<OpenAI.Files.FileObjectsPage, OpenAI.Files.FileObject> {
       return this.openAiClient.files.list();
     }
-    
-    createNewVectorStore(name: string): APIPromise<VectorStore> {
-      return this.openAiClient.vectorStores.create({
-          name,
-      });
-    }
 
     addFileToVectorStore(fileId: string): APIPromise<OpenAI.VectorStores.Files.VectorStoreFile> {
         return this.openAiClient.vectorStores.files.create(
-            this.vectorStoreId,
+            this.vectorStoreName,
             {
                 file_id: fileId,
             }
         );
     }
 
-    getListOfStores(): PagePromise<OpenAI.VectorStores.VectorStoresPage, OpenAI.VectorStores.VectorStore> {
+    createNewVectorStore(name: string): APIPromise<VectorStore> {
+      return this.openAiClient.vectorStores.create({
+          name,
+      });
+    }
+
+    getListOfVectorStores(): PagePromise<OpenAI.VectorStores.VectorStoresPage, OpenAI.VectorStores.VectorStore> {
       return this.openAiClient.vectorStores.list();
     }
 
+    async hasVectorStore(name: string): Promise<boolean> {
+      const stores = await this.getListOfVectorStores();
+      return stores.data.some((store) => store.name === name);
+    }
+
     getListOfFilesInStore(): PagePromise<OpenAI.VectorStores.Files.VectorStoreFilesPage, OpenAI.VectorStores.Files.VectorStoreFile> {
-      return this.openAiClient.vectorStores.files.list(this.vectorStoreId);
+      return this.openAiClient.vectorStores.files.list(this.vectorStoreName);
     }
 }
 

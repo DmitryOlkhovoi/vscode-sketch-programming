@@ -10,12 +10,12 @@ import ProjectInit from "./projectInit";
 
 const REGEX_FOR_SKETCH = /\/\/\s*@sketch:\s*([^\s]+)/i;
 
-async function updateSketch(document: vscode.TextDocument, config: any) {
-	const openAi = new OpenAI({ apiKey: config.openAIApiKey });
-	const storage = new Storage(openAi, config.vectorStoreId);
+// async function updateSketch(document: vscode.TextDocument, config: any) {
+// 	const openAi = new OpenAI({ apiKey: config.openAIApiKey });
+// 	const storage = new Storage(openAi, config.vectorStoreId);
 
-	storage.uploadFile(document.uri.fsPath)
-}
+// 	storage.uploadFile(document.uri.fsPath)
+// }
 
 export async function activate(context: vscode.ExtensionContext) {
 	console.log(vscode.workspace.workspaceFolders)
@@ -24,8 +24,10 @@ export async function activate(context: vscode.ExtensionContext) {
 	const workspaces: Record<string, Workspace> = {};
 	const transpiling = new Set<string>();
 	const isTranspilingDirty = new Set<string>();
+
 	let sketchName: string | null = null;
 	let root: string | undefined;
+	let currentWorkspace: Workspace | null = null;
 
 	function updateSketchName(editor: vscode.TextEditor) {
 		if (!editor) {
@@ -54,7 +56,7 @@ export async function activate(context: vscode.ExtensionContext) {
         const projectInit = new ProjectInit();
         await projectInit.copyExampleProjectFiles();
     });
-
+	
 	const currentRootCommand = vscode.commands.registerCommand('sketch-programming--llm-transpiler.currentRoot', async () => {
 		if (vscode.window.activeTextEditor) {
 			await updateRoot(vscode.window.activeTextEditor);
@@ -63,8 +65,58 @@ export async function activate(context: vscode.ExtensionContext) {
 		vscode.window.showInformationMessage(`Sketch-programming Extension: Current root: ${root || 'No root found, start editing your Sketch files.'}`);
     });
 
+	const createCommand = vscode.commands.registerCommand('sketch-programming--llm-transpiler.create', async () => {
+		// TODO refacor to avoid repetition
+		if (!root) {
+			await updateRoot(vscode.window.activeTextEditor!);
+		}
+
+		if (root) {
+			currentWorkspace = workspaces[root];
+		
+			if (!currentWorkspace) {
+				workspaces[root] = currentWorkspace = new Workspace(root);
+				await currentWorkspace.initialize();
+			}
+		}
+		////
+
+		try {
+			if (currentWorkspace !== null && currentWorkspace.storage && currentWorkspace.config) {
+				const vectoreStoreName = currentWorkspace.config.vectorStoreName || currentWorkspace.config.projectId;
+				const assistantName = currentWorkspace.config.assistantName || currentWorkspace.config.projectId;
+				let newVectorStore;
+	
+				if (await currentWorkspace.storage.hasVectorStore(vectoreStoreName)) {
+					vscode.window.showInformationMessage(`Sketch-programming Extension: Creating vector store - ${vectoreStoreName} already exists.`);
+				} else {
+					newVectorStore = await currentWorkspace.storage.createNewVectorStore(vectoreStoreName)
+				}
+	
+				if (await currentWorkspace.hasAssistant(assistantName)) {
+					vscode.window.showInformationMessage(`Sketch-programming Extension: Creating assistant - ${assistantName} already exists.`);
+				} else {
+					if (!newVectorStore?.id) {
+						vscode.window.showErrorMessage(`Sketch-programming Extension: Creating assistant - failed to create vector store or assistant. Vector store ID is missing.`);
+						return;
+					}
+	
+					const assistant = await currentWorkspace.createAssistant(assistantName, newVectorStore.id, currentWorkspace.config.assistantCreateParams || null);
+	
+					if (assistant.id) {
+						vscode.window.showInformationMessage(`Sketch-programming Extension: Creating - assistant and store created successfully. Upload your sketch files!`);
+					}
+				}
+			}
+		} catch (error) {
+			console.log(error);
+			vscode.window.showErrorMessage(`Sketch-programming Extension: Creating - failed to create assistant or store: ${error}`);
+		}
+    });
+
     context.subscriptions.push(initializeCommand);
     context.subscriptions.push(currentRootCommand);
+    context.subscriptions.push(createCommand);
 
 	vscode.window.onDidChangeActiveTextEditor((editor: vscode.TextEditor | undefined) => {
 		if (editor) {
@@ -104,7 +156,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
 			if (root) {
 				console.log(`Sketch-programming Extension: Config found in the root`);
-				let currentWorkspace = workspaces[root];
+				currentWorkspace = workspaces[root];
 				
 				if (!currentWorkspace) {
                     workspaces[root] = currentWorkspace = new Workspace(root);

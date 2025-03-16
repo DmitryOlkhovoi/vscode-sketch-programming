@@ -27,7 +27,7 @@
       },
       {
         "command": "sketch-programming--llm-transpiler.create",
-        "title": "Sketch-programming: Create assistant and vector store (WIP)"
+        "title": "Sketch-programming: Create assistant and vector store"
       },
       {
         "command": "sketch-programming--llm-transpiler.upload",
