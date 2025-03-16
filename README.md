@@ -10,6 +10,7 @@ VS Code Marketplace - https://marketplace.visualstudio.com/items?itemName=Sketch
 If you have a new project - run all 3 commands.
 
 Don't forget to add your key to sketch.config.js after ```Sketch-programming: Initialize```.
+
 Describe your sketches in the sketch/sketches files (Example will be generated for React.js. You can make it for whatever you want - new lang, another framework, configs etc.)
 
 ### Extension commands:
