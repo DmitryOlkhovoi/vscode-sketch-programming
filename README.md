@@ -108,6 +108,12 @@ export default {
 ```
 
 ### Current state
-You need to creare Assistant, Vector store for it, and upload Sketch files that describe the syntax (for example https://github.com/DmitryOlkhovoi/Sketch-programming/blob/main/ReactComponentAskedModelToAddMoreRulesItself.md).
+Supports only OpenAI
+Potantially have some problems as extension doesn't track config file changes. Or one of Sketch files removing. Work in progress. Better notifications and such edge cases will be handled.
 
-Work in progress, this process will be automated
+Use extension commands to Initialize, Create Assistant and Vector store, and then to upload Sketches
+Example Sketch: https://github.com/DmitryOlkhovoi/Sketch-programming/blob/main/ReactComponentAskedModelToAddMoreRulesItself.md
+Full tutorial will be written.
+
+### Contributrion
+Just do it if you want

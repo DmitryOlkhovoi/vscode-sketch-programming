@@ -26,8 +26,9 @@ class Workspace {
         if (this.config) {
             this.openAiClient = new OpenAI({ apiKey: this.config.openAIApiKey });
             this.assistant = new Assistant(this.config.assistantName || this.config.projectId, this.openAiClient);
-            this.storage = new Storage(this.config.vectorStoreName || this.config.projectId, this.openAiClient);
-
+            this.storage = new Storage(this.root, this.config.vectorStoreName || this.config.projectId, this.openAiClient);
+            
+            await this.storage.initialize();
             await this.assistant.intialize();
         }
     }

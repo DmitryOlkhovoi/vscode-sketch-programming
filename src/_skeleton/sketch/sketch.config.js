@@ -1,4 +1,4 @@
-export default {
+module.exports = {
     openAIApiKey: 'YOUR_OPENAI_API_KEY',
     projectId: 'foo-bar',
     assistanName: 'foo-bar', // By default, the assistant name is the same as the project ID

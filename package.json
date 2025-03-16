@@ -31,7 +31,7 @@
       },
       {
         "command": "sketch-programming--llm-transpiler.upload",
-        "title": "Sketch-programming: Upload all sketches (WIP)"
+        "title": "Sketch-programming: Upload all sketches"
       }
     ]
   },

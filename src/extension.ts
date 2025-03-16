@@ -78,6 +78,8 @@ export async function activate(context: vscode.ExtensionContext) {
 				workspaces[root] = currentWorkspace = new Workspace(root);
 				await currentWorkspace.initialize();
 			}
+		} else {
+			vscode.window.showErrorMessage(`Sketch-programming Workspace: No config in the root`);
 		}
 		////
 
@@ -109,14 +111,47 @@ export async function activate(context: vscode.ExtensionContext) {
 				}
 			}
 		} catch (error) {
-			console.log(error);
+			console.log(`Sketch-programming Extension: Creating - failed to create assistant or store: ${error}`);
 			vscode.window.showErrorMessage(`Sketch-programming Extension: Creating - failed to create assistant or store: ${error}`);
 		}
+    });
+
+	const uploadCommand = vscode.commands.registerCommand('sketch-programming--llm-transpiler.upload', async () => {
+		// TODO refacor to avoid repetition
+		if (!root) {
+			await updateRoot(vscode.window.activeTextEditor!);
+		}
+
+		if (root) {
+			currentWorkspace = workspaces[root];
+		
+			if (!currentWorkspace) {
+				workspaces[root] = currentWorkspace = new Workspace(root);
+				await currentWorkspace.initialize();
+			}
+
+			if (currentWorkspace.storage) {
+				try {
+					await currentWorkspace.storage.uploadSketches();
+					vscode.window.showInformationMessage(`Sketch-programming Extension: Uploading - all files uploaded successfully.`);
+				} catch (error) {
+					console.log(`Sketch-programming Extension: Uploading - failed to upload files: ${error}`);
+					vscode.window.showErrorMessage(`Sketch-programming Extension: Uploading - failed to upload files: ${error}`);
+				}
+			} else {
+				vscode.window.showErrorMessage(`Sketch-programming Extension: Uploading - no storage available.`);
+			}
+
+		} else {
+			vscode.window.showErrorMessage(`Sketch-programming Workspace: No config in the root`);
+		}
+		////
     });
 
     context.subscriptions.push(initializeCommand);
     context.subscriptions.push(currentRootCommand);
     context.subscriptions.push(createCommand);
+    context.subscriptions.push(uploadCommand);
 
 	vscode.window.onDidChangeActiveTextEditor((editor: vscode.TextEditor | undefined) => {
 		if (editor) {

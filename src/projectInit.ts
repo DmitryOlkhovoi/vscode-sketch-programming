@@ -16,12 +16,13 @@ class ProjectInit {
 
     copyExampleProjectFiles() {
         const extensionPath = vscode.extensions.getExtension('sketch-programming.sketch-programming-llm-transpiler')?.extensionPath;
+        
         if (!extensionPath) {
             vscode.window.showErrorMessage('Sketch-programming Extension: Unable to find extension path');
             return;
         }
 
-        const skeletonPath = path.join(extensionPath, '_skeleton');
+        const skeletonPath = path.join(extensionPath, 'src', '_skeleton');
         const projectPath = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
 
         if (!projectPath) {
