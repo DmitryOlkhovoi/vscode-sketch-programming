@@ -31,10 +31,10 @@ Project/
 
 ### Example with React.js
 
-![Снимок экрана 2025-03-14 232453](https://github.com/user-attachments/assets/0e881713-d010-4bf2-8b0c-585d8288d98c)
+![Снимок экрана 2025-03-15 215915](https://github.com/user-attachments/assets/5311db86-1d5f-46f5-b122-a5b7e5c161a0)
 
 
-```
+```javascript
 // @sketch:reactComponent
 // @ext:tsx
 
@@ -43,16 +43,24 @@ Component Count
 props add = 0
 state count = 0
 
-<div onclick="count += add"> Add {add} </div>
+effect {
+    console.log("Component mounted");
+    
+    cleanup {
+        console.log("Cleanup");
+    }
+}
+
+<div onclick="count += add"> Will add {add} </div>
 <div>
-    Current count: {count}
+    Current  count: {count}
 </div>
 ```
 
-On save transpiles to:
+transforms to
 
 ```typescript
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface Props {
     add?: number;
@@ -61,20 +69,29 @@ interface Props {
 const CountComponent: React.FC<Props> = ({ add = 0 }) => {
     const [count, setCount] = useState<number>(0);
 
+    useEffect(() => {
+        console.log("Component mounted");
+
+        return () => {
+            console.log("Cleanup");
+        };
+    }, []);
+
     const handleClick = () => {
         setCount((prev: number) => prev + add);
     };
 
     return (
         <div>
-            <div onClick={handleClick}>Add {add}</div>
-            <div>Current count: {count}</div>
+            <div onClick={handleClick}> Will add {add} </div>
+            <div>
+                Current count: {count}
+            </div>
         </div>
     );
 };
 
 export default CountComponent;
-
 ```
 
 ### Config
