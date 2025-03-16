@@ -22,7 +22,7 @@ class ProjectInit {
             return;
         }
 
-        const skeletonPath = path.join(extensionPath, 'src', '_skeleton');
+        const skeletonPath = path.join(extensionPath, 'out', '_skeleton');
         const projectPath = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
 
         if (!projectPath) {
