@@ -59,8 +59,5 @@
   },
   "dependencies": {
     "openai": "^4.87.3"
-  },
-  "files": [
-    "_skeleton/**/*"
-  ]
+  }
 }
