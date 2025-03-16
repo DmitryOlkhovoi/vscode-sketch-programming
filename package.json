@@ -2,7 +2,7 @@
   "name": "sketch-programming-llm-transpiler",
   "displayName": "Sketch-Programming (LLM Transpiler)",
   "description": "https://github.com/DmitryOlkhovoi/Sketch-programming",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "publisher": "sketch-programming",
   "repository": "https://github.com/DmitryOlkhovoi/vscode-sketch-programming/",
   "engines": {

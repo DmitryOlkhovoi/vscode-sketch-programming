@@ -109,6 +109,9 @@ export async function activate(context: vscode.ExtensionContext) {
 						vscode.window.showInformationMessage(`Sketch-programming Extension: Creating - assistant and store created successfully. Upload your sketch files!`);
 					}
 				}
+				
+				// Reinitalize workspace to get the new assistant and storage
+				currentWorkspace.initialize();
 			}
 		} catch (error) {
 			console.log(`Sketch-programming Extension: Creating - failed to create assistant or store: ${error}`);
