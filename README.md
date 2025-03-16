@@ -29,7 +29,7 @@ Project/
 └── other_project_files/
 ```
 
-####  Sketch-programming: Initialize
+####  Sketch-programming: Create assistant and vector stor
 ```CTR + Shift + P``` and search for ```Sketch-programming: Create assistant and vector store```. This command will create Assistant and a Vector store for it.
 
 ### Example with React.js
